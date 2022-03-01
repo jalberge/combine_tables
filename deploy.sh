@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # method name
-METHOD_NAME=method_name_goes_here
+METHOD_NAME=combine_tables
 
 # docker build parameters (most likely, the defaults are OK)
 EXTRA_DOCKER_BUILD_ARGS=""
@@ -26,5 +26,5 @@ VERSION=${BRANCH}v${NCOMMIT}
 docker build -t getzlab/$METHOD_NAME:${VERSION} ${EXTRA_DOCKER_BUILD_ARGS} ${DOCKER_BUILD_PATH}
 
 # push method docker
-docker tag getzlab/$METHOD_NAME:${VERSION} gcr.io/broad-getzlab-workflows/$METHOD_NAME:${VERSION}
-docker push gcr.io/broad-getzlab-workflows/$METHOD_NAME:${VERSION}
+docker tag getzlab/$METHOD_NAME:${VERSION} gcr.io/broad-getzlab-mm-germline/$METHOD_NAME:${VERSION}
+docker push gcr.io/broad-getzlab-mm-germline/$METHOD_NAME:${VERSION}
