@@ -13,7 +13,9 @@ option_list <- list(
   make_option(c("-m", "--matchcolumnsbyname"), action="store_true", default=TRUE,
               help="Match columns by 'name' (or by 'position')"),  
   make_option(c("-o", "--outputfile"), default="out.txt", action="store",
-              help="Output file name"),
+              help="Output file name"),  
+  make_option(c("-q", "--quote"), default="\"", action="store",
+              help="Read this character as a quote (see data.table::fread documentation). Set to '' for maf files"),
   make_option(c("-c", "--fillcolumns"), default=TRUE, action="store_true",
               help="(from rbindlist doc) 'fills missing columns'. Automatically sets matchcolumnsbyname to TRUE")
 )
@@ -30,7 +32,7 @@ file.list <- as.list(strsplit(opt$filelist, ",")[[1]])
 message("list of files: ", file.list)
 message("number of elements: ", length(file.list))
 ptm <- proc.time()
-lf <- lapply(file.list, fread, sep=opt$fieldseparator)
+lf <- lapply(file.list, fread, sep=opt$fieldseparator, quote=opt$quote)
 message("finished reading")
 proc.time() - ptm
 dt <- rbindlist(lf, use.names = opt$matchcolumnsbyname, fill=opt$fillcolumns)
