@@ -6,6 +6,8 @@ require(optparse)
 option_list <- list( 
   make_option(c("-l", "--filelist"), action="store", type='character', 
               help="comma-separated list of files to combine"), 
+  make_option(c("-n", "--samplenames"), default=NULL, action="store", type='character', 
+              help="comma-separated list of names (optional)"), 
   make_option(c("-s", "--fieldseparator"), default="auto", action="store", type='character',
               help="Input file field separator (default: trust R/data.table)"),
   make_option(c("-t", "--outputfieldseparator"),  default="\t", action="store", type='character',
@@ -28,14 +30,22 @@ message("arguments: ")
 str(opt)
 
 file.list <- as.list(strsplit(opt$filelist, ",")[[1]])
-
+if(!is.null(opt$samplenames)) names.list <- as.list(strsplit(opt$samplenames, ",")[[1]])
+  
 message("list of files: ", file.list)
 message("number of elements: ", length(file.list))
 ptm <- proc.time()
 lf <- lapply(file.list, fread, sep=opt$fieldseparator, quote=opt$quote)
+if(!is.null(opt$samplenames)) names(lf) <- names.list
+
 message("finished reading")
 proc.time() - ptm
-dt <- rbindlist(lf, use.names = opt$matchcolumnsbyname, fill=opt$fillcolumns)
+
+dt <- rbindlist(lf, 
+                use.names = opt$matchcolumnsbyname, 
+                fill=opt$fillcolumns, 
+                idcol = !is.null(opt$samplenames))
+
 message("writing ", nrow(dt), " rows.")
 ptm <- proc.time()
 fwrite(dt, file = opt$outputfile, sep=opt$outputfieldseparator)
