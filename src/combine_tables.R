@@ -29,6 +29,8 @@ opt <- parse_args(OptionParser(option_list=option_list))
 message("arguments: ")
 str(opt)
 
+if(opt$samplenames=="NULL") opt$samplenames <- NULL
+
 file.list <- as.list(strsplit(opt$filelist, ",")[[1]])
 if(!is.null(opt$samplenames)) names.list <- as.list(strsplit(opt$samplenames, ",")[[1]])
   
