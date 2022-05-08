@@ -33,7 +33,7 @@ task combine_tables {
       --fieldseparator=${fieldseparator} \
       --outputfieldseparator=${outputfieldseparator} \
       --quote=${true="\\\"" false="" quote_delimited_fields} \
-      --samplenames={sep="," default="NULL" sample_names}
+      --samplenames=${sep="," default="NULL" sample_names}
       
   }
   
