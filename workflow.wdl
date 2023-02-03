@@ -22,6 +22,7 @@ task combine_tables {
     String? fieldseparator = "auto"
     String? outputfieldseparator = "$'\t'"
     Boolean quote_delimited_fields = true
+    Boolean fix_dates = false
   }
     
   String output_name = pSetID + "." + extension
@@ -33,6 +34,7 @@ task combine_tables {
       --fieldseparator=${fieldseparator} \
       --outputfieldseparator=${outputfieldseparator} \
       --quote=${true="\\\"" false="" quote_delimited_fields} \
+      --fixdates=${true="TRUE" false="FALSE" fix_dates} \
       --samplenames=${sep="," default="NULL" sample_names}
       
   }
