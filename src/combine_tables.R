@@ -14,7 +14,7 @@ option_list <- list(
               help="Output file field separator"), 
   make_option(c("-m", "--matchcolumnsbyname"), action="store_true", default=TRUE,
               help="Match columns by 'name' (or by 'position')"),    
-  make_option(c("-fd", "--fixdates"), action="store_true", default=FALSE,
+  make_option(c("-f", "--fixdates"), action="store_true", default=FALSE,
               help="Convert IDate / Date to character column type"),  
   make_option(c("-o", "--outputfile"), default="out.txt", action="store",
               help="Output file name"),  
