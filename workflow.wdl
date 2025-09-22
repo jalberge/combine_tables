@@ -18,7 +18,7 @@ task combine_tables {
     Array[File] input_files
     Array[String]? sample_names
     
-    String docker = "gcr.io/broad-getzlab-mm-germline/combine_tables@sha256:bc362443c091e81c84d718c7d7f1fd64184cfb884695497f9c06f84b7d724b55"
+    String docker = "gcr.io/broad-getzlab-mm-germline/combine_tables@sha256:ad97c91758e8b01b980b8a03a4a383725159c6481357a411db857406e60083fc"
     String? fieldseparator = "auto"
     String? outputfieldseparator = "$'\t'"
     Boolean quote_delimited_fields = true
