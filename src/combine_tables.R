@@ -20,7 +20,7 @@ option_list <- list(
               help="Output file name"),  
   make_option(c("-q", "--quote"), default="\"", action="store",
               help="Read this character as a quote (see data.table::fread documentation). Set to '' for maf files"),
-  make_option(c("-c", "--fillcolumns"), default=TRUE, action="store_true",
+  make_option(c("-c", "--fillcolumns"), action="store_true",
               help="(from rbindlist doc) 'fills missing columns'. Automatically sets matchcolumnsbyname to TRUE")
 )
 
@@ -39,7 +39,7 @@ if(!is.null(opt$samplenames)) names.list <- as.list(strsplit(opt$samplenames, ",
 message("list of files: ", file.list)
 message("number of elements: ", length(file.list))
 ptm <- proc.time()
-lf <- lapply(file.list, fread, sep=opt$fieldseparator, quote=opt$quote, )
+lf <- lapply(file.list, fread, sep=opt$fieldseparator, quote=opt$quote, fill=TRUE)
 if(!is.null(opt$samplenames)) names(lf) <- names.list
 
 message("finished reading")
